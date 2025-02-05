@@ -1,2 +1,2 @@
 # 8-Puzzle-Game
-8-puzzle game is a sliding puzzle that consists of a frame of numbered square tiles in random order with one tile missing.
+This is a C++ implementation of the classic 8-puzzle game. The game requires you to enter a seed value to generate a randomized puzzle, after which you can play the game. If you solve the puzzle in less than 30 rounds you will see a "Well done!" message, and if you exceed a 100 rounds the program will terminate. 
