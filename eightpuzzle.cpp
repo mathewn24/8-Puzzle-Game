@@ -161,26 +161,33 @@ int getTile(int state, int position){
 
 /* Returns the number of inversions of the puzzle state. */
 int inversion(int state) {
-    // Add a return statement in order to compile
     int inv = 0;
-    char stateStr[10]; // Buffer to hold the state as a string
-    sprintf(stateStr, "%09d", state); // Convert state to a 9-character string (including leading zeros)
-    
-    // Loop through each pair of tiles
-    // Iterate through the state string
-    for (int i = 0; i < 8; i++) {
-        if (stateStr[i] == '0') continue; // Skip the missing tile
-        
-        for (int j = i + 1; j < 9; j++) {
-            if (stateStr[j] == '0') continue; // Skip the missing tile
-            
-            // If the current tile is greater than the next tile, it's an inversion
-            if (stateStr[i] > stateStr[j]) {
+    // Loop through each position (1 to 9)
+    for (int pos1 = 1; pos1 <= 9; ++pos1) {
+        // Extract the digit at pos1
+        int pow1 = 1;
+        for (int i = 0; i < (9 - pos1); ++i) pow1 *= 10;
+        int digit1 = (state / pow1) % 10;
+
+        // Skip the missing tile (0)
+        if (digit1 == 0) continue;
+
+        // Compare digit1 with all subsequent digits
+        for (int pos2 = pos1 + 1; pos2 <= 9; ++pos2) {
+            // Extract the digit at pos2
+            int pow2 = 1;
+            for (int i = 0; i < (9 - pos2); ++i) pow2 *= 10;
+            int digit2 = (state / pow2) % 10;
+
+            // Skip the missing tile (0)
+            if (digit2 == 0) continue;
+
+            // If digit1 > digit2, it's an inversion
+            if (digit1 > digit2) {
                 inv++;
             }
         }
     }
-
     return inv;
 }
 
